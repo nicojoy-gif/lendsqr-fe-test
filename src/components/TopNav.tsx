@@ -1,9 +1,8 @@
-import React from 'react';
-import { FaSearch, FaFileAlt, FaBell, FaUser, FaAngleDown } from 'react-icons/fa';
+import { FaSearch,  FaBell,  FaAngleDown } from 'react-icons/fa';
 import logo from '../assets/Group.svg'
 import '../styles/main.scss'; // Import the stylesheet
 import avatar from '../assets/avatar.png'
-import SideNavItem from './SideNavItem';
+
 function TopNav() {
   return (
     <div className='top-nav'>

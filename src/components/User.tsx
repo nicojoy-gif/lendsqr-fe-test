@@ -1,12 +1,12 @@
-import React from 'react'
+
 import UserComponent from './UserComponent'
 import icon from '../assets/icon.svg'
 import icon1 from '../assets/icon (1).svg'
 import icon2 from '../assets/icon (2).svg'
 import icon3 from '../assets/icon (3).svg'
-type Props = {}
 
-const User = (props: Props) => {
+
+const User = () => {
   return (
     <div>
         <h2 className='user-header'>Users</h2>

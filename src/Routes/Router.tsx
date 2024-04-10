@@ -1,12 +1,10 @@
-import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Login from '../LoginPage/Login'
 import Dashboard from '../DashboardPage/Dashboard'
 import UserDetails from '../UserDetailsPage/UserDetails'
 
-type Props = {}
 
-const Router = (props: Props) => {
+const Router = () => {
   return (
     <>
     <Routes>

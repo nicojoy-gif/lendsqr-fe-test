@@ -1,17 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import TopNav from "../components/TopNav";
 import SideNav from "../components/SideNav";
 import "../styles/main.scss";
 import user from "../assets/avatar.svg";
-import {IoMdStar, IoMdStarOutline} from "react-icons/io";
+import { IoMdStar, IoMdStarOutline } from "react-icons/io";
 
 import backarrow from "../assets/Vector.svg";
 import Name from "../components/Name";
-import { FaStar } from "react-icons/fa6";
-import { IoStar } from "react-icons/io5";
-type Props = {};
-
-const UserDetails = (props: Props) => {
+const UserDetails = () => {
   const [activeItem, setActiveItem] = useState<number>(0); // State to keep track of the active item
 
   return (
@@ -50,12 +46,9 @@ const UserDetails = (props: Props) => {
                 <div className="usertier">
                   <p>User’s Tier</p>
                   <div className="staricon">
-                  
-                
                     <IoMdStar color="rgba(233, 178, 0, 1)" />
                     <IoMdStarOutline color="rgba(233, 178, 0, 1)" />
-                    <IoMdStarOutline color="rgba(233, 178, 0, 1)"/>
-                    
+                    <IoMdStarOutline color="rgba(233, 178, 0, 1)" />
                   </div>
                 </div>
                 <div className="border"></div>
@@ -65,12 +58,42 @@ const UserDetails = (props: Props) => {
                 </div>
               </div>
               <div className="userbar">
-                <div className={activeItem === 1 ? 'active' : ''} onClick={() => setActiveItem(1)}>General Details</div>
-                <div className={activeItem === 2 ? 'active' : ''} onClick={() => setActiveItem(2)}>Documents</div>
-                <div className={activeItem === 3 ? 'active' : ''} onClick={() => setActiveItem(3)}>Bank Details</div>
-                <div className={activeItem === 4 ? 'active' : ''} onClick={() => setActiveItem(4)}>Loans</div>
-                <div className={activeItem === 5 ? 'active' : ''} onClick={() => setActiveItem(5)}>Savings</div>
-                <div className={activeItem === 6 ? 'active' : ''} onClick={() => setActiveItem(6)}>App and System</div>
+                <div
+                  className={activeItem === 1 ? "active" : ""}
+                  onClick={() => setActiveItem(1)}
+                >
+                  General Details
+                </div>
+                <div
+                  className={activeItem === 2 ? "active" : ""}
+                  onClick={() => setActiveItem(2)}
+                >
+                  Documents
+                </div>
+                <div
+                  className={activeItem === 3 ? "active" : ""}
+                  onClick={() => setActiveItem(3)}
+                >
+                  Bank Details
+                </div>
+                <div
+                  className={activeItem === 4 ? "active" : ""}
+                  onClick={() => setActiveItem(4)}
+                >
+                  Loans
+                </div>
+                <div
+                  className={activeItem === 5 ? "active" : ""}
+                  onClick={() => setActiveItem(5)}
+                >
+                  Savings
+                </div>
+                <div
+                  className={activeItem === 6 ? "active" : ""}
+                  onClick={() => setActiveItem(6)}
+                >
+                  App and System
+                </div>
               </div>
             </div>
 
