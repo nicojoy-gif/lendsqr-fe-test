@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { MdFilterList } from 'react-icons/md';
 import TopNav from '../components/TopNav';
 import SideNav from '../components/SideNav';
@@ -6,9 +6,8 @@ import User from '../components/User';
 import '../styles/main.scss';
 import jsonData from './generated.json'; // Import the JSON file
 
-type Props = {};
 
-const Dashboard: React.FC<Props> = (props) => {
+const Dashboard = () => {
   // State to hold table data and pagination settings
   const [tableData, setTableData] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
