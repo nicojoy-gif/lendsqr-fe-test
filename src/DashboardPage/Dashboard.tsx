@@ -42,8 +42,6 @@ const Dashboard = () => {
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers.push(i);
   }
-  const maxItemsToShow = 100; // Maximum number of items to show
-  const itemsToShow = Math.min(totalItems, maxItemsToShow); // Number of items to show
   
   // Modal functions
   const openModal = () => setShowModal(true);
