@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaAngleDown, FaBriefcase, FaHome, FaSignOutAlt } from 'react-icons/fa';
+import { FaAngleDown, FaBars, FaBriefcase, FaHome, FaSignOutAlt, FaTimes } from 'react-icons/fa';
 import SideNavItem from './SideNavItem';
 import { BusinessData, CustomersData, SettingData } from '../Data/data';
 
@@ -7,13 +7,18 @@ interface SideNavProps {}
 
 const SideNav: React.FC<SideNavProps> = () => {
   const [activeItem, setActiveItem] = useState<string>('');
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
+
   const handleItemClick = (itemName: string) => {
     setActiveItem((prevActiveItem) => (prevActiveItem === itemName ? '' : itemName));
   };
-  
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen((prevIsSidebarOpen) => !prevIsSidebarOpen);
+  };
 
   return (
-    <div>
+    <div className={`sidenav-container ${isSidebarOpen ? 'open' : 'closed'}`}>
       <div className='sidenav-box'>
         <div className='side-header'>
           <SideNavItem icon={FaBriefcase} text='Switch Organization' onClick={() => handleItemClick('Switch Organization')} /> <FaAngleDown />
@@ -49,6 +54,10 @@ const SideNav: React.FC<SideNavProps> = () => {
           <div className='ver'>v1.2.0</div>
         </div>
       </div>
+      <button className="toggle-button" onClick={toggleSidebar}>
+        {isSidebarOpen ? <FaBars /> : <FaTimes /> }
+      </button>
+      
     </div>
   );
 };
