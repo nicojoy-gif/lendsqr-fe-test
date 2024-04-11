@@ -6,10 +6,11 @@ import { FaIdBadge, FaSackDollar, FaSackXmark, FaSliders } from 'react-icons/fa6
 export interface SideNavItemData {
   icon: IconType;
   text: string;
+  page?: string;
 }
 
 export const CustomersData: SideNavItemData[] = [
-  { icon: FaUserFriends, text: 'Users' },
+  { icon: FaUserFriends, text: 'Users' , page: '/userdetails'},
   { icon: FaUsers, text: 'Guarantors' },
   { icon: FaSackDollar, text: 'Loans' }, 
   { icon: FaHandshake, text: 'Decision Models' },

@@ -9,7 +9,7 @@ function TopNav() {
       <nav className='topnav'>
     <div className='sectioned'>
         <div>
-          <img src={logo} alt='logo' className=''/>
+          <img src={logo} alt='logo' className='top-logo'/>
         </div>
     
       <div className="search-container">

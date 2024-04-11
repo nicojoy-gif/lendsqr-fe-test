@@ -7,6 +7,7 @@ import { IoMdStar, IoMdStarOutline } from "react-icons/io";
 
 import backarrow from "../assets/Vector.svg";
 import Name from "../components/Name";
+import { Link } from "react-router-dom";
 const UserDetails = () => {
   const [activeItem, setActiveItem] = useState<number>(0); // State to keep track of the active item
 
@@ -18,10 +19,12 @@ const UserDetails = () => {
         <div className="dashboard-box">
           <section className="users-box">
             <header>
+              <Link to='/dashboard' >
               <div className="back">
                 <img src={backarrow} alt="backarrow" />
                 <p>Back to Users</p>
               </div>
+              </Link>
               <div className="user-flex">
                 <h2 className="userdetail-header">User Details</h2>
                 <div>

@@ -1,56 +1,56 @@
-import React from 'react';
-import '../styles/main.scss';
-import { FaAngleDown } from 'react-icons/fa6';
+import React, { useState } from 'react';
+import { FaAngleDown, FaBriefcase, FaHome, FaSignOutAlt } from 'react-icons/fa';
 import SideNavItem from './SideNavItem';
 import { BusinessData, CustomersData, SettingData } from '../Data/data';
-import { FaBriefcase, FaHome, FaSignOutAlt } from 'react-icons/fa';
-interface SideNavProps {
-  
-}
+
+interface SideNavProps {}
 
 const SideNav: React.FC<SideNavProps> = () => {
+  const [activeItem, setActiveItem] = useState<string>('');
+  const handleItemClick = (itemName: string) => {
+    setActiveItem((prevActiveItem) => (prevActiveItem === itemName ? '' : itemName));
+  };
+  
+
   return (
     <div>
       <div className='sidenav-box'>
-       <div className='side-header'>
-       <SideNavItem  icon={FaBriefcase} text='Switch Organization' /> <FaAngleDown />
-       </div>
-       <div className='dash'>
-       <SideNavItem  icon={FaHome} text='Dashboard' />
-       </div>
-       <div>
-        <h2>CUSTOMERS</h2>
+        <div className='side-header'>
+          <SideNavItem icon={FaBriefcase} text='Switch Organization' onClick={() => handleItemClick('Switch Organization')} /> <FaAngleDown />
+        </div>
+        <div className='dash'>
+          <SideNavItem icon={FaHome} text='Dashboard' onClick={() => handleItemClick('Dashboard')} />
+        </div>
         <div>
-        {CustomersData.map((item, index) => (
-        <SideNavItem key={index} icon={item.icon} text={item.text} />
-      ))}
+          <h2>CUSTOMERS</h2>
+          <div>
+            {CustomersData.map((item) => (
+              <SideNavItem key={item.text} icon={item.icon} page={item.page} text={item.text} isActive={activeItem === item.text} onClick={() => handleItemClick(item.text)} />
+            ))}
+          </div>
         </div>
-       </div>
-
-       <div>
-        <h2>BUSINESS</h2>
         <div>
-        {BusinessData.map((item, index) => (
-        <SideNavItem key={index} icon={item.icon} text={item.text} />
-      ))}
+          <h2>BUSINESS</h2>
+          <div>
+            {BusinessData.map((item) => (
+              <SideNavItem key={item.text} icon={item.icon} text={item.text} isActive={activeItem === item.text} onClick={() => handleItemClick(item.text)} />
+            ))}
+          </div>
         </div>
-       </div>
-       <div>
-        <h2>SETTINGS</h2>
-        <div >
-        {SettingData.map((item, index) => (
-        <SideNavItem key={index} icon={item.icon} text={item.text} />
-      ))}
+        <div>
+          <h2>SETTINGS</h2>
+          <div>
+            {SettingData.map((item) => (
+              <SideNavItem key={item.text} icon={item.icon} text={item.text} isActive={activeItem === item.text} onClick={() => handleItemClick(item.text)} />
+            ))}
+          </div>
+          <div className='setting-border'></div>
+          <div> <SideNavItem icon={FaSignOutAlt} text='Logout' onClick={() => handleItemClick('Logout')} /></div>
+          <div className='ver'>v1.2.0</div>
         </div>
-        <div className='setting-border'>
-
-        </div>
-        <div> <SideNavItem  icon={FaSignOutAlt} text='Logout' /></div>
-        <div className='ver'>v1.2.0</div>
-       </div>
       </div>
     </div>
   );
-}
+};
 
 export default SideNav;

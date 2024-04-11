@@ -5,21 +5,25 @@ import SideNav from '../components/SideNav';
 import User from '../components/User';
 import '../styles/main.scss';
 import jsonData from './generated.json'; // Import the JSON file
+import Modal from '../components/Modal';
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
 
 const Dashboard = () => {
   // State to hold table data and pagination settings
   const [tableData, setTableData] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(10); // Number of items per page
+  const [itemsPerPage, setItemsPerPage] = useState(10); // Number of items per page
   const [showModal, setShowModal] = useState(false);
-  const [formData, setFormData] = useState<any>({});
 
   useEffect(() => {
-    // Set the table data when the component mounts
     setTableData(jsonData);
-  }, []); // Fetch data on component mount
-
+  }, []); 
+  const handleSelectChange = (value: any) => {
+    // Update the state with the selected value
+    setItemsPerPage(parseInt(value));
+  };
+  
   // Pagination functions
   const nextPage = () => setCurrentPage(currentPage + 1);
   const previousPage = () => setCurrentPage(currentPage - 1);
@@ -38,24 +42,11 @@ const Dashboard = () => {
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers.push(i);
   }
-
+  const maxItemsToShow = 100; // Maximum number of items to show
+  const itemsToShow = Math.min(totalItems, maxItemsToShow); // Number of items to show
+  
   // Modal functions
   const openModal = () => setShowModal(true);
-  const closeModal = () => setShowModal(false);
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // Handle form submission here, e.g., apply filters
-    console.log('Form submitted with data:', formData);
-    closeModal();
-  };
-  const handleReset = () => {
-    // Reset form data
-    setFormData({});
-  };
   const getStatusColor = (status: string): string => {
     switch (status.toLowerCase()) {
       case 'active':
@@ -132,76 +123,50 @@ const Dashboard = () => {
               </tbody>
             </table>
             {/* Pagination controls */}
-            <div className="pagination">
-              <button onClick={previousPage} disabled={currentPage === 1}>Prev</button>
+            {/* Pagination controls */}
+          <div className="pagination">
+            <div>
+              <p> Showing <select onChange={(e) => handleSelectChange(e.target.value)}>
+    <option value="10">10</option>
+    <option value="20">20</option>
+    <option value="50">50</option>
+    <option value="100">100</option>
+  </select> out of 100</p>
+              
+            </div>
+            {/* Pagination icons */}
+            <div className='pagination-icon'>
+              <button onClick={previousPage} disabled={currentPage === 1}>
+                <FaAngleLeft color='rgba(33, 63, 125, 1)'/>
+              </button>
               <div className="page-numbers">
+                {/* Page numbers */}
                 {pageNumbers.map((number, index) => {
                   if (number === 1 || number === totalPages || (number >= currentPage - 1 && number <= currentPage + 1)) {
                     return (
                       <span key={number} className={number === currentPage ? 'active' : ''} onClick={() => setCurrentPage(number)}>
-                        {number}
+                        {number}{'  '}{/* Add a space after each number */}
                       </span>
                     );
-                  } else if (index === 1 || index === pageNumbers.length - 2) {
+                  } else if (index === 1 || index === 2 || index === 3 || index === pageNumbers.length - 2) {
                     return <span key={number}>...</span>;
                   }
                   return null;
                 })}
               </div>
-              <button onClick={nextPage} disabled={currentPage === totalPages}>Next</button>
+              <button onClick={nextPage} disabled={currentPage === totalPages}>
+                <FaAngleRight color='rgba(33, 63, 125, 1)'/>
+              </button>
             </div>
-          </section>
-        </div>
+          </div>
+        </section>
       </div>
+    </div>
+    {/* Modal */}
       {/* Modal */}
       {showModal && (
         <div className="modal">
-          <div className="modal-content">
-            <form onSubmit={handleSubmit}>
-            <div className="form-group">
-      <label htmlFor="organization">Organization</label>
-      <div className="select-wrapper">
-        <select id="organization" name="organization" value={formData.organization || ''} >
-          <option value="">Select</option>
-          <option value="organization1">Organization 1</option>
-          <option value="organization2">Organization 2</option>
-          {/* Add more options as needed */}
-        </select>
-      </div>
-    </div>
-              <div className="form-group">
-                <label htmlFor="username">Username</label>
-                <input type="text" id="username" name="username" placeholder='User' value={formData.username || ''} onChange={handleInputChange} />
-              </div>
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input type="email" id="email" name="email" placeholder='Email' value={formData.email || ''} onChange={handleInputChange} />
-              </div>
-              <div className="form-group">
-                <label htmlFor="phone">Phone number</label>
-                <input type="text" id="phone" name="phone" placeholder='Phone Number' value={formData.phone || ''} onChange={handleInputChange} />
-              </div>
-              <div className="form-group">
-                <label htmlFor="registered">Date </label>
-                <input type="date" id="registered" placeholder='Date' name="registered" value={formData.registered || ''} onChange={handleInputChange} />
-              </div>
-              <div className="form-group">
-      <label htmlFor="organization">Status</label>
-      <div className="select-wrapper">
-        <select id="organization" name="organization" value={formData.organization || ''} >
-          <option value="">Select</option>
-          <option value="organization1">Inactive</option>
-          <option value="organization2">Active</option>
-          {/* Add more options as needed */}
-        </select>
-      </div>
-    </div>
-              <div className="button-group">
-                <button type="button" onClick={handleReset}>Reset</button>
-                <button type="submit" className='filter'>Filter</button>
-              </div>
-            </form>
-          </div>
+          <Modal closeModal={() => setShowModal(false)} />
         </div>
       )}
     </div>
